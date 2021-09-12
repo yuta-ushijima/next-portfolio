@@ -5,11 +5,14 @@ const Blog = (props) => {
 export default Blog;
 
 export async function getStaticProps() {
-  const testText = "Next.jsポートフォリオ";
+  const blogs = ((context) => {
+    const keys = context.keys();
+    const values = keys.map(context);
+    console.log(keys);
+    console.log(values);
+  })(require.context("../data", true, /\.md$/));
 
   return {
-    props: {
-      test: testText,
-    },
+    props: {},
   };
 }
