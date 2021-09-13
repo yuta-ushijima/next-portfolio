@@ -26,6 +26,8 @@ export async function getStaticProps() {
 
   console.log(blogs);
   return {
-    props: {},
+    props: {
+      blogs: blogs,
+    },
   };
 }
