@@ -38,10 +38,12 @@ export async function getStaticProps() {
     return data;
   })(require.context("../data", true, /\.md$/));
 
-  console.log(blogs);
+  const orderedBlogs = blogs.sort((a, b) => {
+    return b.frontmatter.id - a.frontmatter.id;
+  });
   return {
     props: {
-      blogs: blogs,
+      blogs: JSON.parse(JSON.stringify(orderedBlogs)),
     },
   };
 }
