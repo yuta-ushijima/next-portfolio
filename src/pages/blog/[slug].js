@@ -1,8 +1,14 @@
 import matter from "gray-matter";
+import ReactMarkdown from "react-markdown";
 
 const SingleBlog = (props) => {
-  console.log(props);
-  return <h1>記事ページ</h1>;
+  return (
+    <div>
+      <h1>{props.frontmatter.title}</h1>
+      <p>{props.frontmatter.date}</p>
+      <ReactMarkdown children={props.markdownBody}></ReactMarkdown>
+    </div>
+  );
 };
 
 export default SingleBlog;
