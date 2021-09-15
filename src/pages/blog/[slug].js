@@ -1,6 +1,7 @@
 import matter from "gray-matter";
 
-const SingleBlog = () => {
+const SingleBlog = (props) => {
+  console.log(props);
   return <h1>記事ページ</h1>;
 };
 
@@ -17,7 +18,6 @@ export async function getStaticPaths() {
   })(require.context("../../data", true, /\.md$/));
 
   const paths = blogSlugs.map((blogSlug) => `/blog/${blogSlug}`);
-
   return {
     paths: paths,
     fallback: false,
@@ -28,8 +28,10 @@ export async function getStaticProps(context) {
   const { slug } = context.params;
   const data = await import(`../../data/${slug}.md`);
   const singleDocument = matter(data.default);
-  console.log(singleDocument);
   return {
-    props: {},
+    props: {
+      frontmatter: singleDocument.data,
+      markdownBody: singleDocument.content,
+    },
   };
 }
