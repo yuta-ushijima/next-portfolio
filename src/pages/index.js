@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const Index = () => {
   return (
@@ -26,6 +27,13 @@ const Index = () => {
               Lorem Ipsum.
             </p>
           </div>
+          <Image
+            src="/images/profile.jpg"
+            alt="hefo"
+            height={1195}
+            width={1000}
+            quality={90}
+          />
         </div>
         <div>
           <h2>Skills</h2>
