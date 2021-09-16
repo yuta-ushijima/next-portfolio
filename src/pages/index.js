@@ -5,6 +5,13 @@ const Index = () => {
   return (
     <>
       <div>
+        <Image
+          src="/images/index-hero.jpg"
+          alt="hero"
+          layout="fill"
+          objectFit="cover"
+          quality={90}
+        />
         <div>
           <h1>I'm Abe Hiroki!</h1>
           <h3>JavaScript Developer</h3>
