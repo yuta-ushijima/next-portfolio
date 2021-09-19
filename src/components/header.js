@@ -8,7 +8,7 @@ const Header = () => {
         <div>
           <Link href="/">
             <a>
-              <Image src="/images/logo.jpg" alt="logo" width={50} height={50} />
+              <Image src="/images/logo.png" alt="logo" width={50} height={50} />
             </a>
           </Link>
           <ul>
