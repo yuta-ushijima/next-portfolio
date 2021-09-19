@@ -1,8 +1,8 @@
+import Image from "next/image";
 import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
-import Image from "next/dist/client/image";
 import Layout from "../../components/layout";
-import * as style from "../styles/singleBlog.module.scss";
+import * as style from "../../styles/singleBlog.module.scss";
 
 const SingleBlog = (props) => {
   return (
@@ -19,7 +19,7 @@ const SingleBlog = (props) => {
         <div className={style.container}>
           <h1>{props.frontmatter.title}</h1>
           <p>{props.frontmatter.date}</p>
-          <ReactMarkdown children={props.markdownBody}></ReactMarkdown>
+          <ReactMarkdown children={props.markdownBody} />
         </div>
       </div>
     </Layout>
@@ -39,6 +39,7 @@ export async function getStaticPaths() {
   })(require.context("../../data", true, /\.md$/));
 
   const paths = blogSlugs.map((blogSlug) => `/blog/${blogSlug}`);
+
   return {
     paths: paths,
     fallback: false,
@@ -49,6 +50,7 @@ export async function getStaticProps(context) {
   const { slug } = context.params;
   const data = await import(`../../data/${slug}.md`);
   const singleDocument = matter(data.default);
+
   return {
     props: {
       frontmatter: singleDocument.data,
