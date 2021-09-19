@@ -8,8 +8,8 @@ const Blog = (props) => {
   console.log(props);
   return (
     <Layout>
-      <div>
-        <div>
+      <div className={style.wrapper}>
+        <div className={style.container}>
           <h1>Blog</h1>
           <p>エンジニアの日常生活をお届けします</p>
           {props.blogs.map((blog, index) => (
@@ -21,7 +21,7 @@ const Blog = (props) => {
                   <a>Read More</a>
                 </Link>
               </div>
-              <div>
+              <div className={style.cardImage}>
                 <Image
                   src={blog.frontmatter.image}
                   alt="card-image"
