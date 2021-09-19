@@ -3,10 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/layout";
 import * as style from "../styles/blog.module.scss";
+import Seo from "../components/seo";
 
 const Blog = ({blogs}) => {
   return (
     <Layout>
+      <Seo title="ブログ" description="これはブログページです" />
       <div className={style.wrapper}>
         <div className={style.container}>
           <h1>Blog</h1>

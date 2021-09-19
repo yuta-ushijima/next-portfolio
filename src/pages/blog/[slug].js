@@ -3,11 +3,13 @@ import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import Layout from "../../components/layout";
 import * as style from "../../styles/singleBlog.module.scss";
+import Seo from "../../components/seo";
 
 const SingleBlog = ({frontmatter, markdownBody}) => {
-  const { title, date, image} = frontmatter
+  const { title, date, except, image} = frontmatter
   return (
     <Layout>
+      <Seo title={title} description={except} />
       <div className={style.hero}>
         <Image
           src={image}
