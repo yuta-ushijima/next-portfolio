@@ -1,21 +1,40 @@
 import matter from "gray-matter";
+import Image from "next/image";
 import Link from "next/link";
+import Layout from "../components/layout";
+import * as style from "../styles/blog.module.scss";
 
 const Blog = (props) => {
   console.log(props);
   return (
-    <div>
-      <h1>ブログページ</h1>
-      {props.blogs.map((blog, index) => (
-        <div key={index}>
-          <h3>{blog.frontmatter.title}</h3>
-          <p>{blog.frontmatter.date}</p>
-          <Link href={`/blog/${blog.slug}`}>
-            <a>Read More</a>
-          </Link>
+    <Layout>
+      <div className={style.wrapper}>
+        <div className={style.container}>
+          <h1>Blog</h1>
+          <p>エンジニアの日常生活をお届けします</p>
+          {props.blogs.map((blog, index) => (
+            <div key={index}>
+              <div>
+                <h3>{blog.frontmatter.title}</h3>
+                <p>{blog.frontmatter.date}</p>
+                <Link href={`/blog/${blog.slug}`}>
+                  <a>Read More</a>
+                </Link>
+              </div>
+              <div className={style.cardImage}>
+                <Image
+                  src={blog.frontmatter.image}
+                  alt="card-image"
+                  height={300}
+                  width={300}
+                  quality={90}
+                ></Image>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </Layout>
   );
 };
 export default Blog;
