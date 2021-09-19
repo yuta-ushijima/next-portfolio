@@ -1,4 +1,5 @@
 import Link from "next/dist/client/link";
+import * as style from "../styles/common.module.scss";
 
 const Footer = () => {
   return (

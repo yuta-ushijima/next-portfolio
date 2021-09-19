@@ -1,5 +1,6 @@
 import Link from "next/dist/client/link";
 import Image from "next/dist/client/image";
+import * as style from "../styles/common.module.scss";
 
 const Header = () => {
   return (

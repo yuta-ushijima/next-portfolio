@@ -2,6 +2,7 @@ import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import Image from "next/dist/client/image";
 import Layout from "../../components/layout";
+import * as style from "../styles/singleBlog.module.scss";
 
 const SingleBlog = (props) => {
   return (

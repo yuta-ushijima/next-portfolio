@@ -2,6 +2,7 @@ import matter from "gray-matter";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/layout";
+import * as style from "../styles/blog.module.scss";
 
 const Blog = (props) => {
   console.log(props);
