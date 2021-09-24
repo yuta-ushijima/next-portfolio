@@ -3,9 +3,10 @@ import Link from "next/link";
 import Layout from "../components/layout";
 import * as style from "../styles/blog.module.scss";
 import Seo from "../components/seo";
-import { getAllBlogs } from "../utils/mdQueries";
+import { getAllBlogs, blogsPerPage } from "../utils/mdQueries";
+import {Pagination} from "../components/pagination";
 
-const Blog = ({blogs}) => {
+const Blog = ({blogs, numberPages}) => {
   return (
     <Layout>
       <Seo title="ブログ" description="これはブログページです" />
@@ -16,8 +17,8 @@ const Blog = ({blogs}) => {
           {blogs.map((blog, index) => {
             const { title, date, except, image } = blog.frontmatter
             return(
-            <div key={index}>
-              <div>
+            <div key={index} className={style.blogCard}>
+              <div className={style.textContainer}>
                 <h3>{title}</h3>
                 <p>{except}</p>
                 <p>{date}</p>
@@ -25,13 +26,14 @@ const Blog = ({blogs}) => {
                   <a>Read More</a>
                 </Link>
               </div>
-              <div className={style.cardImage}>
+              <div className={style.cardImg}>
                 <Image src={image} alt="card-image" height={300} width={300} quality={90} />
               </div>
             </div>
             )}
           )}
         </div>
+        <Pagination numberPages={numberPages}/>
       </div>
     </Layout>
   );
@@ -39,11 +41,14 @@ const Blog = ({blogs}) => {
 export default Blog;
 
 export async function getStaticProps() {
-  const { orderedBlogs } = await getAllBlogs()
+  const { orderedBlogs, numberPages } = await getAllBlogs()
+
+  const limitedBlogs = orderedBlogs.slice(0, blogsPerPage)
 
   return {
     props: {
-      blogs: orderedBlogs,
+      blogs: limitedBlogs,
+      numberPages: numberPages
     },
   };
 }
