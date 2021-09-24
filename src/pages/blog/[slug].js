@@ -4,8 +4,9 @@ import Layout from "../../components/layout";
 import * as style from "../../styles/singleBlog.module.scss";
 import Seo from "../../components/seo";
 import { getAllBlogs, getSingleBlog } from "../../utils/mdQueries";
+import PrevNext from "../../components/prevNext";
 
-const SingleBlog = ({frontmatter, markdownBody}) => {
+const SingleBlog = ({frontmatter, markdownBody, prev, next}) => {
   const { title, date, except, image} = frontmatter
   return (
     <Layout>
@@ -24,6 +25,7 @@ const SingleBlog = ({frontmatter, markdownBody}) => {
           <p>{date}</p>
           <ReactMarkdown children={markdownBody} />
         </div>
+        <PrevNext prev={prev} next={next} />
       </div>
     </Layout>
   );
@@ -43,11 +45,17 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { singleDocument } = await getSingleBlog(context)
+  const { orderedBlogs} = await getAllBlogs()
+
+  const prev = orderedBlogs.filter(orderedBlogs => orderedBlogs.frontmatter.id === singleDocument.data.id -1)
+  const next = orderedBlogs.filter(orderedBlogs => orderedBlogs.frontmatter.id === singleDocument.data.id +1)
 
   return {
     props: {
       frontmatter: singleDocument.data,
       markdownBody: singleDocument.content,
+      prev: prev,
+      next: next,
     },
   };
 }
